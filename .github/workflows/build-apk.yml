@@ -17,7 +17,7 @@ jobs:
         run: |
           M=android/app/src/main/AndroidManifest.xml
           sed -i 's/<activity /<activity android:screenOrientation="sensorLandscape" /' $M
-          sed -i 's#<resources>#<resources>\n    <item name="android:windowFullscreen" type="bool">true</item>#' android/app/src/main/res/values/styles.xml || true
+          sed -i 's#\(<style name="AppTheme.NoActionBar"[^>]*>\)#\1\n        <item name="android:windowFullscreen">true</item>#' android/app/src/main/res/values/styles.xml
       - name: App icon
         run: npx --yes @capacitor/assets generate --android
       - run: npx cap sync android
